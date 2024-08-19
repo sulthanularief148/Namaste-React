@@ -1,7 +1,7 @@
 import { CDN_URL } from "../utils/constants";
 
 export const RestaurentCard = (props) => {
-  const { resData } = props;
+  const { resData, swiggyOffer } = props;
 
   const { cloudinaryImageId, name, cuisines, costForTwo, avgRating } =
     resData?.info;
@@ -9,10 +9,10 @@ export const RestaurentCard = (props) => {
   const deliverTime = resData?.info?.sla?.deliveryTime;
 
   return (
-    <div className="restaurent-card w-[25rem] hover:scale-110 transition-transform duration-300 ease-in-out rounded-lg p-8">
+    <div className="restaurent-card w-[25rem] hover:scale-110 transition-transform duration-300 ease-in-out rounded-lg p-1">
       <img
         src={`${CDN_URL}/${cloudinaryImageId}`}
-        className="card-img h-56 w-[25rem] rounded-xl object-cover object-center"
+        className="card-img h-56 w-[25rem] rounded-xl object-cover object-center filter brightness-50"
       />
       <div className="card-body w-[20rem]">
         <h2 className="restaurent-name">
@@ -30,7 +30,21 @@ export const RestaurentCard = (props) => {
 
           <h3 className="food-cost">{costForTwo}</h3>
         </div>
+        <div className="relative bottom-[9rem] left-[10px] text-white text-center font-bold text-2xl rounded-lg p-2">
+          {swiggyOffer}
+        </div>
       </div>
     </div>
   );
+};
+export const withOffer = (RestaurentCard) => {
+  return (props) => {
+    const { swiggyOffer } = props;
+    console.log("The swiggy offer value is", props);
+    return (
+      <>
+        <RestaurentCard {...props} swiggyOffer={swiggyOffer} />
+      </>
+    );
+  };
 };

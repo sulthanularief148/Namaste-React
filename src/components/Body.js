@@ -1,13 +1,15 @@
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import useFetchingRestaurants from "../utils/useFetchingRestaurants";
-import { RestaurentCard } from "./RestaurentCard";
+import { RestaurentCard, withOffer } from "./RestaurentCard";
 import Shimmer from "./Shimmer";
-import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 
 export const Body = () => {
   const [searchText, setSearchText] = useState("");
   const [listOfRestaurant, setListOfRestaurant] = useFetchingRestaurants();
+  const RestaurantCardWithOffer = withOffer(RestaurentCard);
+
   const onlineStatus = useOnlineStatus();
 
   const handleSearch = (event) => {
@@ -20,7 +22,6 @@ export const Body = () => {
 
   return (
     <>
-      {/* bg-sky-500 */}
       {onlineStatus ? (
         <div className="body m-24">
           <div className="filter-btn flex justify-between m-8">
@@ -61,11 +62,27 @@ export const Body = () => {
 
           <div className="res-container flex flex-wrap gap-8  justify-between">
             {listOfRestaurant.length > 0 ? (
-              listOfRestaurant.map((res) => (
-                <Link to={`/restaurants/${res?.info?.id}`} key={res?.info?.id}>
-                  <RestaurentCard resData={res} />
-                </Link>
-              ))
+              listOfRestaurant.map((res) => {
+                const offer = res?.info?.aggregatedDiscountInfoV3?.header;
+                const subOffer = res?.info?.aggregatedDiscountInfoV3?.subHeader;
+                const swiggyOffer = `${offer} ${subOffer}`;
+
+                return (
+                  <Link
+                    to={`/restaurants/${res?.info?.id}`}
+                    key={res?.info?.id}
+                  >
+                    {offer || subOffer ? (
+                      <RestaurantCardWithOffer
+                        resData={res}
+                        swiggyOffer={swiggyOffer}
+                      />
+                    ) : (
+                      <RestaurentCard resData={res} />
+                    )}
+                  </Link>
+                );
+              })
             ) : (
               <Shimmer />
             )}
