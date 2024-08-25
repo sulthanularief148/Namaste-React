@@ -20,11 +20,11 @@ const FunctionalAbout = () => {
     const data = await fetch("https://api.github.com/users/sulthanularief143");
     const response = await data.json();
     setUserInfo(response);
-    console.log("The response is ", response);
+
   }
 
   const userData = userInfo;
-  console.log("The useData is ", userData);
+
 
   return (
     <>

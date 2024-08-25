@@ -13,18 +13,24 @@ export const Body = () => {
   const onlineStatus = useOnlineStatus();
 
   const handleSearch = (event) => {
-    setSearchText(event.target.value);
-    const filteredRestaurant = listOfRestaurant.filter((res) =>
-      res.info.name.toLowerCase().includes(event.target.value.toLowerCase())
-    );
-    setListOfRestaurant(filteredRestaurant);
+    const searchValue = event.target.value;
+    setSearchText(searchValue);
+
+    if (searchValue === "") {
+      setListOfRestaurant(listOfRestaurant);
+    } else {
+      const filteredRestaurant = listOfRestaurant.filter((res) =>
+        res.info.name.toLowerCase().includes(searchValue.toLowerCase())
+      );
+      setListOfRestaurant(filteredRestaurant);
+    }
   };
 
   return (
     <>
       {onlineStatus ? (
         <div className="body m-24">
-          <div className="filter-btn flex justify-between m-8">
+          <div className="filter-btn md:flex justify-around m-8">
             <button
               className="shadow-lg w-36 p-2.5 rounded-3xl"
               onClick={() => {
@@ -36,10 +42,10 @@ export const Body = () => {
             >
               Filter food
             </button>
-            <div className="search-btn-container flex items-center gap-4">
+            <div className="search-btn-container md:flex items-center gap-4">
               <input
                 type="text"
-                className="search-input h-7 border border-gray-950 rounded-3xl p-4"
+                className="md:w-[500px] search-input h-7 border border-gray-950 rounded-3xl p-4 focus:border-blue-500"
                 value={searchText}
                 onChange={handleSearch}
                 placeholder="Search..."
@@ -84,7 +90,7 @@ export const Body = () => {
                 );
               })
             ) : (
-              <Shimmer />
+              <div>Loading...</div>
             )}
           </div>
         </div>

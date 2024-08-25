@@ -14,7 +14,7 @@ export const RestaurentCard = (props) => {
         src={`${CDN_URL}/${cloudinaryImageId}`}
         className="card-img h-56 w-[25rem] rounded-xl object-cover object-center filter brightness-50"
       />
-      <div className="card-body w-[20rem]">
+      <div className="card-body">
         <h2 className="restaurent-name">
           <strong>{name}</strong>
         </h2>
@@ -40,7 +40,7 @@ export const RestaurentCard = (props) => {
 export const withOffer = (RestaurentCard) => {
   return (props) => {
     const { swiggyOffer } = props;
-    console.log("The swiggy offer value is", props);
+
     return (
       <>
         <RestaurentCard {...props} swiggyOffer={swiggyOffer} />
