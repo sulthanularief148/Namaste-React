@@ -12,8 +12,10 @@ const useFetchingRestaurants = () => {
       const json = await data?.json();
 
       const restaurant =
-        json?.data.cards[1].card.card.gridElements.infoWithStyle.restaurants ||
-        [];
+        json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants || [];
+      console.log(restaurant);
+
       setListOfRestaurant(restaurant);
     } catch (error) {
       console.error("Fetching Restaurant Error", error);

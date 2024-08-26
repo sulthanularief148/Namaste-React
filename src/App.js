@@ -10,6 +10,9 @@ import FunctionalAbout from "./components/FunctionalAbout";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import Cart from "./components/Cart";
 const Grocery = lazy(() => import("../src/components/Grocery"));
 
 const AppLayout = () => {
@@ -21,16 +24,18 @@ const AppLayout = () => {
     setUserName(data.name);
   }, []);
   return (
-    <UserContext.Provider value={{ loggedInUser: userName }}>
-      <div className="app-container min-h-screen flex flex-col">
-        <Heading />
-        <main className="flex-grow">
-          <Outlet />
-        </main>
+    <Provider store={appStore}>
+      <UserContext.Provider value={{ loggedInUser: userName }}>
+        <div className="app-container min-h-screen flex flex-col">
+          <Heading />
+          <main className="flex-grow">
+            <Outlet />
+          </main>
 
-        <Footer />
-      </div>
-    </UserContext.Provider>
+          <Footer />
+        </div>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 const appRouter = createBrowserRouter([
@@ -53,6 +58,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
     errorElement: <Error />,

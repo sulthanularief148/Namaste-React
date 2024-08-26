@@ -37,8 +37,8 @@ const RestaurantMenu = () => {
 
   return (
     <div className="menu ">
-      <div className="shadow-2xl w-1/2 rounded-2xl mx-auto p-8 md:flex-row-reverse items-center hover:scale-110 transition-transform duration-300 cursor-pointer">
-        <div className="p-12 flex justify-between items-center">
+      <div className="shadow-2xl md:w-1/2 rounded-2xl mx-auto p-8 md:flex-row-reverse items-center hover:scale-110 transition-transform duration-300 cursor-pointer">
+        <div className="p-12 md:flex justify-between items-center">
           <div>
             <h2 className="font-bold">{name}</h2>
             <h3>

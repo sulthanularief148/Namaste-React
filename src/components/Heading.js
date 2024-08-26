@@ -5,6 +5,8 @@ import { logo } from "../assets";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import useCurrentLocation from "../../useCurrentLocation";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
+import { FaCartPlus } from "react-icons/fa";
 export const Heading = () => {
   const [btnName, setBtnName] = useState("Login");
   const onlineStatus = useOnlineStatus();
@@ -14,6 +16,9 @@ export const Heading = () => {
   function toggleNavbar() {
     setIsOpen(!isOpen);
   }
+
+  const cartItems = useSelector((store) => store.cart.items);
+  console.log(cartItems);
 
   return (
     <header className="md:flex block justify-between items-center m-4">
@@ -50,7 +55,7 @@ export const Heading = () => {
         <img className="w-24" src={logo} />
       </div>
       {/* Location */}
-      <div className="flex md:flex-row flex-col">
+      <div className="flex md:flex-row flex-col text-center">
         {address ? (
           <p className="text-[lightgray]"> {address}</p>
         ) : error ? (
@@ -84,8 +89,16 @@ export const Heading = () => {
               Grocery
             </Link>
           </li>
+
           <li>
-            <Link className="nav-links">Cart</Link>
+            <Link className="nav-links" to="/cart">
+              <FaCartPlus size={25} />
+              <div className="relative bottom-12 left-4 bg-red-600 rounded-3xl h-5 w-5">
+                <span className="absolute left-[7px] text-[12px] text-white">
+                  {cartItems.length}
+                </span>
+              </div>
+            </Link>
           </li>
           <li>
             <Link className="nav-links">{loggedInUser}</Link>
