@@ -4,7 +4,7 @@ export const loadState = () => {
     try {
       const serializedState = localStorage.getItem("cart");
       if (serializedState === null) {
-        return undefined; // Let reducers initialize the state
+        return undefined; 
       }
       return JSON.parse(serializedState);
     } catch (err) {

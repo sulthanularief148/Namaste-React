@@ -11,14 +11,14 @@
 
 import { configureStore } from "@reduxjs/toolkit";
 import cartReducer from "./cartSlice";
-const preloadedState = loadState(); // Load initial state from localStorage
-import { loadState, saveState } from "../utils/localStorage"; // Adjust the path as necessary
+const preloadedState = loadState(); 
+import { loadState, saveState } from "../utils/localStorage";
 
 const appStore = configureStore({
   reducer: {
     cart: cartReducer,
   },
-  preloadedState, // Use the preloaded state
+  preloadedState, 
 });
 
 appStore.subscribe(() => {

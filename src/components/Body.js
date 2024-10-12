@@ -30,8 +30,8 @@ export const Body = () => {
     <>
       {onlineStatus ? (
         <div className="body m-24">
-          <div className="filter-btn md:flex justify-around m-8">
-            <button
+          <div className="filter-btn md:flex justify-around m-8 ">
+            {/* <button
               className="shadow-lg w-36 p-2.5 rounded-3xl"
               onClick={() => {
                 const filteredRestaurant = listOfRestaurant.filter(
@@ -41,17 +41,17 @@ export const Body = () => {
               }}
             >
               Filter food
-            </button>
-            <div className="search-btn-container md:flex items-center gap-4">
+            </button> */}
+            <div className="relative left-0  md:w-[600px]">
               <input
                 type="text"
-                className="md:w-[500px] search-input h-7 border border-gray-950 rounded-3xl p-4 focus:border-blue-500"
+                className="w-full p-2 border border-[#FF5200] focus:border-[#FF5200] pr-20"
                 value={searchText}
                 onChange={handleSearch}
                 placeholder="Search..."
               />
               <button
-                className="shadow-xl w-36 p-2.5 rounded-3xl"
+                className="absolute top-0 right-0 h-full w-36 text-white bg-[#FF5200] shadow-xl"
                 onClick={() => {
                   const filteredRestaurant = listOfRestaurant.filter((res) =>
                     res.info.name
